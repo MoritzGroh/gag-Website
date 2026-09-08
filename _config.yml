@@ -15,12 +15,12 @@ max_width: 930px
 
 back_to_top: true
 
-enable_math: false
+enable_math: true
 enable_tooltips: false
-enable_darkmode: false
+enable_darkmode: true
 enable_project_categories: false
 enable_medium_zoom: false
-enable_progressbar: false
+enable_progressbar: true
 enable_video_embedding: false
 
 collections:
@@ -43,6 +43,13 @@ plugins:
   - al_icons
   - jekyll-feed
   - jekyll-sitemap
+  - al_math
 
 sass:
   style: compressed
+
+# -----------------------------------------------------------------------------
+# Library versions
+# -----------------------------------------------------------------------------
+
+third_party_libraries: {}
