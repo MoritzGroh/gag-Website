@@ -51,7 +51,7 @@ jobs:
             BASEURL="/${GITHUB_REPOSITORY#*/}"
           fi
 
-bundle exec jekyll build --baseurl "$BASEURL"
+          bundle exec jekyll build --baseurl "$BASEURL"
 
       - name: Purge unused CSS
         run: npx purgecss -c purgecss.config.js
