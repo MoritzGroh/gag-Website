@@ -5,8 +5,8 @@ description: >
 
 lang: de
 
-url: ""
-baseurl: ""
+url: https://moritzgroh.github.io
+baseurl: /gag-Website
 
 navbar_fixed: true
 footer_fixed: true
