@@ -9,12 +9,14 @@ Unsere Schule nimmt seit 2010 an dem von der Regionalen Gesundheitskonferenz des
 
 Bei dem Programm „**Früh in Form**“ geht es vor allem darum, bei den Kindern eine Basis für einen gesunden Lebensstil zu entwickeln. Somit möchten wir als Schule einen elementaren Beitrag zur Vermeidung von Übergewicht und Fehlernährung leisten – und das nicht mit einem erhobenen Zeigefinger, sondern mit viel praktischem Tun und Freude am Genuss.
 
-![Beim Zubereiten von Gerichten aus aller Welt.]({{ '/content/schulleben/IMG_0417.jpg' | relative_url }}){: style="float: left; margin-right: 15px;"}
+![Beim Zubereiten von Gerichten aus aller Welt.]({{ '/content/schulleben/IMG_0417.jpg' | relative_url }}){: style="float: left; margin-right: 15px; width:35%;"}
 
 
 Den Grundschulkindern werden nämlich nicht nur die theoretischen Grundlagen vermittelt, sondern sie dürfen auch zusammen mit ihren Eltern selbst tätig werden: Von der Planung der nächsten Einheit, über das Besprechen, Einkaufen der benötigten Lebensmittel, Zubereiten der Speisen, bis hin zum gemeinsamen Essen. Dabei werden auch die Lebens- und Essgewohnheiten anderer Länder behandelt. Somit wagen wir einen „Blick über den eigenen Tellerrand“ – im wahrsten Sinne des Wortes.
 
 Und weil jeder weiß, dass Essen in einem angenehmen und ansprechenden Umfeld doppelt so gut schmeckt, steht auch das Schreiben von Speisekarten, das Tisch decken und das festliche Dekorieren in einer der beiden letzten Einheiten im Vordergrund.
+
+<p></p>
 
 <h4>Was bietet „<b>Früh in Form</b>“ Gesunde Ernährung als Schulfach für Grundschulen:</h4>
 

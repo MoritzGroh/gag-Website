@@ -14,6 +14,6 @@ children:
   - title: Projekt Früh in Form
     permalink: /projekt-frueh-in-form/
   - title: divider
-  - title: Medienkompetenz macht Schule
+  - title: Medienkompetenz macht Schule *to be added*
     permalink: /medienkompetenz-macht-schule/
 ---

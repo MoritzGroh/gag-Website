@@ -77,7 +77,7 @@ footer_fixed: true
 search_enabled: false
 
 # Dimensions
-max_width: 930px
+max_width: 1075px
 
 # -----------------------------------------------------------------------------
 # Open Graph & Schema.org
@@ -176,6 +176,9 @@ plugins:
   - al_ext_posts
   - al_img_tools
   - al_math
+
+pagination:
+  enabled: true
 
 # Sitemap settings
 defaults:
