@@ -33,6 +33,7 @@ pagination:
     </div>
   {% endif %}
 
+
   {% if site.display_tags and site.display_tags.size > 0 or site.display_categories and site.display_categories.size > 0 %}
     <div class="tag-category-list">
       <ul class="p-0 m-0">
@@ -67,6 +68,421 @@ pagination:
     </div>
   {% endif %}
 
+
+  <!-- ========================================================= -->
+  <!-- BEITRÄGE NACH MONAT                                       -->
+  <!-- ========================================================= -->
+
+  {% if site.posts.size > 0 %}
+
+    <div class="post-archive">
+
+      <details class="post-archive-dropdown">
+
+        <summary>
+          <span>
+            <i class="fa-solid fa-calendar-days fa-sm"></i>
+            Archivesuche
+          </span>
+        </summary>
+
+
+        <div class="post-archive-content">
+
+          {% assign archive_month_keys = "" %}
+
+
+          <!-- ================================================= -->
+          <!-- MONATSLISTE                                       -->
+          <!-- ================================================= -->
+
+          {% for archive_post in site.posts %}
+
+            {% assign archive_month_key = archive_post.date | date: "%Y-%m" %}
+
+            {% unless archive_month_keys contains archive_month_key %}
+
+              {% assign archive_month_keys = archive_month_keys
+                | append: archive_month_key
+                | append: "|" %}
+
+
+              {% assign archive_month = archive_post.date | date: "%B" %}
+
+              <details class="post-archive-month">
+
+                <summary>
+
+                  <span>
+
+                    {% case archive_month %}
+                      {% when "January" %}Januar
+                      {% when "February" %}Februar
+                      {% when "March" %}März
+                      {% when "April" %}April
+                      {% when "May" %}Mai
+                      {% when "June" %}Juni
+                      {% when "July" %}Juli
+                      {% when "August" %}August
+                      {% when "September" %}September
+                      {% when "October" %}Oktober
+                      {% when "November" %}November
+                      {% when "December" %}Dezember
+                    {% endcase %}
+
+                    {{ archive_post.date | date: "%Y" }}
+
+                  </span>
+
+                  {% assign month_post_count = 0 %}
+
+                  {% for count_post in site.posts %}
+
+                    {% assign count_post_month = count_post.date | date: "%Y-%m" %}
+
+                    {% if count_post_month == archive_month_key %}
+                      {% assign month_post_count = month_post_count | plus: 1 %}
+                    {% endif %}
+
+                  {% endfor %}
+
+                  <span class="post-archive-count">
+                    ({{ month_post_count }})
+                  </span>
+
+                </summary>
+
+
+                <!-- ============================================= -->
+                <!-- BEITRÄGE DES MONATS                          -->
+                <!-- ============================================= -->
+
+                <ul class="post-archive-list">
+
+                  {% for month_post in site.posts %}
+
+                    {% assign month_post_key = month_post.date | date: "%Y-%m" %}
+
+                    {% if month_post_key == archive_month_key %}
+
+                      <li>
+
+                        <a
+                          href="{{ month_post.url | relative_url }}"
+                          class="post-archive-link">
+
+                          <span class="post-archive-title">
+                            {{ month_post.title }}
+                          </span>
+
+                          <span class="post-archive-date">
+
+                            {{ month_post.date | date: "%-d." }}
+
+                            {% assign archive_post_month = month_post.date | date: "%B" %}
+
+                            {% case archive_post_month %}
+                              {% when "January" %}Januar
+                              {% when "February" %}Februar
+                              {% when "March" %}März
+                              {% when "April" %}April
+                              {% when "May" %}Mai
+                              {% when "June" %}Juni
+                              {% when "July" %}Juli
+                              {% when "August" %}August
+                              {% when "September" %}September
+                              {% when "October" %}Oktober
+                              {% when "November" %}November
+                              {% when "December" %}Dezember
+                            {% endcase %}
+
+                            {{ month_post.date | date: "%Y" }}
+
+                          </span>
+
+                        </a>
+
+                      </li>
+
+                    {% endif %}
+
+                  {% endfor %}
+
+                </ul>
+
+              </details>
+
+            {% endunless %}
+
+          {% endfor %}
+
+        </div>
+
+      </details>
+
+    </div>
+
+  {% endif %}
+
+
+  <!-- ========================================================= -->
+  <!-- CSS FÜR DAS MONATS-DROPDOWN                              -->
+  <!-- ========================================================= -->
+
+<style>
+
+  /* ========================================================= */
+  /* BEITRÄGE NACH MONAT                                       */
+  /* ========================================================= */
+
+  .post-archive {
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* Haupt-Dropdown "Beiträge nach Monat"                     */
+  /* --------------------------------------------------------- */
+
+  .post-archive-dropdown {
+    border: 1px solid var(--global-divider-color);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+
+  .post-archive-dropdown > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 0.9rem 1.1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+  /* Standard-Pfeil des Browsers vollständig entfernen */
+  .post-archive-dropdown > summary::-webkit-details-marker {
+    display: none;
+  }
+
+
+  .post-archive-dropdown > summary::marker {
+    display: none;
+    content: "";
+  }
+
+
+  /* Schöner Chevron rechts */
+  .post-archive-dropdown > summary::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+
+    margin-left: 1rem;
+    flex-shrink: 0;
+  }
+
+
+  .post-archive-dropdown[open] > summary::after {
+    transform: rotate(225deg);
+  }
+
+
+  .post-archive-dropdown > summary:hover {
+    opacity: 0.75;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* Inhalt des Haupt-Dropdowns                                */
+  /* --------------------------------------------------------- */
+
+  .post-archive-content {
+    border-top: 1px solid var(--global-divider-color);
+    padding: 0.35rem 0;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* Einzelne Monate                                           */
+  /* --------------------------------------------------------- */
+
+  .post-archive-month {
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+
+  .post-archive-month:last-child {
+    border-bottom: none;
+  }
+
+
+  .post-archive-month > summary {
+    cursor: pointer;
+    list-style: none;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0.7rem 1.1rem;
+
+    font-size: 1rem;
+
+    user-select: none;
+  }
+
+
+  /* Standard-Browser-Dreieck entfernen */
+  .post-archive-month > summary::-webkit-details-marker {
+    display: none;
+  }
+
+
+  .post-archive-month > summary::marker {
+    display: none;
+    content: "";
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* Kleiner, quadratischer Chevron vor jedem Monat            */
+  /* --------------------------------------------------------- */
+
+  .post-archive-month > summary::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+
+    transform: rotate(-45deg);
+
+    transition: transform 0.2s ease;
+
+    margin-right: 0.85rem;
+    flex-shrink: 0;
+
+    opacity: 0.65;
+  }
+
+
+  /* Chevron dreht sich beim Öffnen */
+  .post-archive-month[open] > summary::before {
+    transform: rotate(45deg);
+  }
+
+
+  .post-archive-month > summary:hover {
+    opacity: 0.75;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* Anzahl der Beiträge                                      */
+  /* --------------------------------------------------------- */
+
+  .post-archive-count {
+    opacity: 0.6;
+
+    margin-left: 0.4rem;
+
+    white-space: nowrap;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* Beiträge innerhalb eines Monats                          */
+  /* --------------------------------------------------------- */
+
+  .post-archive-list {
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0 1.1rem 0.7rem 2.65rem;
+  }
+
+
+  .post-archive-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .post-archive-link {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: baseline;
+
+    gap: 1rem;
+
+    padding: 0.4rem 0;
+
+    text-decoration: none;
+  }
+
+
+  .post-archive-title {
+    flex: 1;
+  }
+
+
+  .post-archive-date {
+    flex-shrink: 0;
+
+    opacity: 0.6;
+
+    font-size: 0.9rem;
+
+    white-space: nowrap;
+  }
+
+
+  .post-archive-link:hover .post-archive-title {
+    text-decoration: underline;
+  }
+
+
+  /* --------------------------------------------------------- */
+  /* Mobile                                                   */
+  /* --------------------------------------------------------- */
+
+  @media (max-width: 576px) {
+
+    .post-archive-link {
+      display: block;
+    }
+
+
+    .post-archive-date {
+      display: block;
+
+      margin-top: 0.15rem;
+    }
+
+  }
+
+</style>
+
+
+  <!-- ========================================================= -->
+  <!-- FEATURED POSTS                                            -->
+  <!-- ========================================================= -->
 
   {% assign featured_posts = site.posts | where: "featured", "true" %}
 
@@ -153,6 +569,10 @@ pagination:
 
   {% endif %}
 
+
+  <!-- ========================================================= -->
+  <!-- NORMALE BEITRAGSLISTE                                    -->
+  <!-- ========================================================= -->
 
   <ul class="post-list">
 
@@ -325,6 +745,10 @@ pagination:
 
   </ul>
 
+
+  <!-- ========================================================= -->
+  <!-- PAGINATION                                                -->
+  <!-- ========================================================= -->
 
   {% if page.pagination.enabled %}
     {% include pagination.liquid %}

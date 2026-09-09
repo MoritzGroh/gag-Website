@@ -4,18 +4,6 @@ title:
 permalink: /
 subtitle: Ganztagsschule in Angebotsform
 
-profile:
-  align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
-
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
-
 announcements:
   enabled: true # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
@@ -31,16 +19,89 @@ images:
   slider: true
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page]({{ '/al-folio/publications/' | relative_url }}) automatically.
+<style>
+  .post-swiper {
+    width: 100%;
+    position: relative;
+    padding-bottom: 3.5rem;
+  }
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+  .post-swiper swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+  }
 
-<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
-  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/9.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
-  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/7.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
-  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/8.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
-  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/10.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
-  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/12.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  .post-swiper .swiper-post-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+  }
+
+  .post-swiper .swiper-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    position: relative;
+    border-radius: 0.25rem;
+  }
+
+  .post-swiper .swiper-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Bildunterschrift garantiert unterhalb des Bildes */
+  .post-swiper .swiper-post-title {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: inherit;
+  }
+
+  /* Punkte am unteren Rand des Bildes */
+  .post-swiper::part(pagination) {
+    bottom: 3.25rem;
+  }
+</style>
+
+<swiper-container
+  class="post-swiper"
+  keyboard="true"
+  navigation="true"
+  pagination="true"
+  pagination-clickable="true"
+  pagination-dynamic-bullets="true"
+  rewind="true"
+>
+  {% for post in site.posts limit:3 %}
+    <swiper-slide>
+      <a href="{{ post.url | relative_url }}" class="swiper-post-link">
+        <div class="swiper-image-wrapper">
+          {% if post.thumbnail %}
+            <img
+              src="{{ post.thumbnail | relative_url }}"
+              alt="{{ post.title }}"
+              loading="lazy"
+            >
+          {% endif %}
+        </div>
+      </a>
+
+      <div class="swiper-post-title">
+        {{ post.title }}
+      </div>
+    </swiper-slide>
+  {% endfor %}
 </swiper-container>
